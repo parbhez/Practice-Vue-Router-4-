@@ -1,0 +1,8 @@
+vue cli : 
+
+1. bubbel
+2. Router
+3. Estc/Prettier
+
+Todo: 
+forEach
