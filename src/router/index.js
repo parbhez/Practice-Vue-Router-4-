@@ -4,7 +4,7 @@ import Home from '@/views/Home.vue'
 // import Hawaii from '@/views/Hawaii.vue'
 // //import Jamaica from '@/views/Jamaica.vue'
 // import Panama from '@/views/Panama.vue'
-
+import sourceData from '@/data.json'
 
 const routes = [
 
@@ -42,14 +42,37 @@ const routes = [
         name: 'destination.show',
         component: () =>
             import ('@/views/DestinationShow.vue'),
-        props: true
+        props: true,
+        beforeEnter: (to, from) => {
+            const exists = sourceData.destinations.find(
+                destination => destination.id === parseInt(to.params.id)
+            )
+            if (!exists) return {
+                name: 'NotFound',
+                params: { pathMatch: to.path.split('/').slice(1) },
+                query: to.query,
+                hash: to.hash,
+            }
+        }
     },
+
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: () =>
+            import ('@/views/NotFound.vue')
+    },
+
 ]
 
 const allRouterPath = createRouter({
     history: createWebHistory(),
     routes,
-    linkActiveClass: 'nav-active-class'
+    linkActiveClass: 'nav-active-class',
+
+    scrollBehavior(to, from, savedPosition) {
+        return savedPosition || { top: 0 }
+    }
 })
 
 export default allRouterPath

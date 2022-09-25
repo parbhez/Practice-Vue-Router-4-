@@ -2,6 +2,8 @@
 
     <section class="destination" v-if="destination">
         <h1>{{ destination.name }}</h1>
+
+        <GoBack />
        
         <div class="destination-details">
             <img :src="`/images/${destination.image}`" :alt="destination.name">
@@ -12,9 +14,13 @@
 
 <script>
     import sourceData from '@/data.json'
+    import GoBack from '@/components/GoBack.vue'
     export default {
 
-        props:{
+        components: {
+            GoBack
+        },
+        props: {
             id:{
                 type: String,
                 required: true
