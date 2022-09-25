@@ -6,3 +6,5 @@ vue cli :
 
 Todo: 
 forEach
+
+//video: https://vueschool.io/lessons/reacting-to-param-changes
